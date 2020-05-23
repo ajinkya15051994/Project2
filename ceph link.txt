@@ -1,0 +1,79 @@
+https://www.howtoforge.com/tutorial/how-to-build-a-ceph-cluster-on-centos-7/
+
+
+
+
+192.168.142.21
+192.168.142.22
+
+
+
+
+
+Host ceph-admin
+        Hostname ceph-admin
+        User cephuser
+ 
+Host ceph-mon1
+        Hostname ceph-mon1
+        User cephuser
+ 
+Host ceph-osd1
+        Hostname ceph-osd1
+        User cephuser
+ 
+Host ceph-osd2
+        Hostname ceph-osd2
+        User cephuser
+ 
+Host ceph-osd3
+        Hostname ceph-osd3
+        User cephuser
+ 
+Host ceph-client
+        Hostname ceph-client
+        User cephuser
+
+
+
+ssh-keyscan ceph-osd1 ceph-osd2 ceph-osd3 ceph-mon1 ceph-client >> ~/.ssh/known_hosts       
+ssh-copy-id ceph-osd1
+ssh-copy-id ceph-osd2
+ssh-copy-id ceph-osd3
+ssh-copy-id ceph-mon1
+ssh-copy-id ceph-client
+
+
+
+
+=====================
+
+configure firewalld---
+
+----------------
+
+
+
+ssh root@ceph-admin
+systemctl start firewalld
+systemctl enable firewalld
+Open port 80, 2003 and 4505-4506, and then reload the firewall. ======on all node complete
+
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=2003/tcp --permanent
+firewall-cmd --zone=public --add-port=4505-4506/tcp --permanent
+firewall-cmd --reload   
+
+===================
+
+
+install ceph-deploy on all node
+
+
+======================
+
+
+open filer
+
+
+
